@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=3 uid="uid://biamq0pr7reuo"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_0bjd0"]
+[ext_resource type="Texture2D" uid="uid://d0djok8y1fmuk" path="res://Assets/Player/Player Front Sheet.png" id="2_3ex0u"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_duotu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egxio"]
+atlas = ExtResource("2_3ex0u")
+region = Rect2(0, 44, 48, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7n0y"]
+atlas = ExtResource("2_3ex0u")
+region = Rect2(48, 44, 48, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4yek"]
+atlas = ExtResource("2_3ex0u")
+region = Rect2(96, 44, 48, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vonn6"]
+atlas = ExtResource("2_3ex0u")
+region = Rect2(144, 44, 48, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gynlk"]
+atlas = ExtResource("2_3ex0u")
+region = Rect2(192, 44, 48, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lucj6"]
+atlas = ExtResource("2_3ex0u")
+region = Rect2(240, 44, 48, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo22s"]
+atlas = ExtResource("2_3ex0u")
+region = Rect2(288, 44, 48, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mogtf"]
+atlas = ExtResource("2_3ex0u")
+region = Rect2(336, 44, 48, 44)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kbq11"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egxio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7n0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4yek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vonn6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gynlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lucj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bo22s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mogtf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_0bjd0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_duotu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kbq11")
