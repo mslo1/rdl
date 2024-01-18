@@ -599,7 +599,5 @@ shape = SubResource("CapsuleShape2D_duotu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_kbq11")
 animation = &"attack_down"
-frame = 5
-frame_progress = 1.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
