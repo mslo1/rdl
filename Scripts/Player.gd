@@ -15,6 +15,8 @@ var regen_health = 1
 var stamina = 100
 var max_stamina = 100
 var regen_stamina = 5
+var stamina_exhausted = false
+var regen_stamina_threshold = 50
 
 signal health_updated
 signal stamina_updated
@@ -33,6 +35,8 @@ func _process(delta):
 	if updated_stamina != stamina:
 		stamina = updated_stamina
 		stamina_updated.emit(stamina, max_stamina)
+		if stamina >= regen_stamina_threshold:
+			stamina_exhausted = false
 
 func _physics_process(delta):
 	
@@ -45,10 +49,15 @@ func _physics_process(delta):
 		direction = direction.normalized()
 	
 	if Input.is_action_pressed("ui_sprint"):
-		if stamina >= 25:
+		if stamina >= 25 && !stamina_exhausted:
 			speed = 100
-			stamina = stamina - 1
+			stamina = stamina - 20 * delta
 			stamina_updated.emit(stamina, max_stamina)
+		else:
+			speed = 50
+			stamina_exhausted = true
+			stamina_updated.emit(stamina, max_stamina)
+				
 	elif Input.is_action_just_released("ui_sprint"):
 		speed = 50
 	
