@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://biamq0pr7reuo"]
+[gd_scene load_steps=91 format=3 uid="uid://biamq0pr7reuo"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_0bjd0"]
 [ext_resource type="Texture2D" uid="uid://d0djok8y1fmuk" path="res://Assets/Player/Player Front Sheet.png" id="2_3ex0u"]
@@ -6,10 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://d2j6cf5ctielj" path="res://Assets/Player/Player Back Sheet.png" id="4_2bswn"]
 [ext_resource type="Script" path="res://GUI/Health.gd" id="5_v6muf"]
 [ext_resource type="Script" path="res://GUI/Stamina.gd" id="6_fathv"]
+[ext_resource type="Script" path="res://GUI/AmmoAmount.gd" id="7_h7pfl"]
 [ext_resource type="Texture2D" uid="uid://b6wahuhdh6mbg" path="res://Assets/Icons/shard_01i.png" id="7_nm7wh"]
 [ext_resource type="FontFile" uid="uid://lxeddhw7kru1" path="res://Assets/Font/ARCADECLASSIC.TTF" id="8_g5oa3"]
 [ext_resource type="Texture2D" uid="uid://bqu376dm7d0ph" path="res://Assets/Icons/potion_02a.png" id="9_ile23"]
+[ext_resource type="Script" path="res://GUI/HealthAmount.gd" id="10_q746w"]
 [ext_resource type="Texture2D" uid="uid://c165g8lnh74xn" path="res://Assets/Icons/potion_02b.png" id="10_rf1d2"]
+[ext_resource type="Script" path="res://GUI/StaminaAmount.gd" id="12_q7uqq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_duotu"]
 radius = 8.0
@@ -673,6 +676,7 @@ offset_top = 8.0
 offset_right = 45.0
 offset_bottom = 28.0
 color = Color(0.227451, 0.223529, 0.207843, 0.415686)
+script = ExtResource("7_h7pfl")
 
 [node name="Icon" type="Sprite2D" parent="UI/AmmoAmount"]
 position = Vector2(10, 10)
@@ -703,6 +707,7 @@ offset_top = 8.0
 offset_right = 90.0
 offset_bottom = 28.0
 color = Color(0.227451, 0.223529, 0.207843, 0.415686)
+script = ExtResource("10_q746w")
 
 [node name="Icon" type="Sprite2D" parent="UI/HealthAmount"]
 position = Vector2(10, 10)
@@ -733,6 +738,7 @@ offset_top = 8.0
 offset_right = 136.0
 offset_bottom = 28.0
 color = Color(0.227451, 0.223529, 0.207843, 0.415686)
+script = ExtResource("12_q7uqq")
 
 [node name="Icon" type="Sprite2D" parent="UI/StaminaAmount"]
 position = Vector2(10, 10)

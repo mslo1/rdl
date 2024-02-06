@@ -4,12 +4,15 @@ extends CharacterBody2D
 @onready var animation_sprite = $AnimatedSprite2D
 @onready var health_bar = $UI/HealthBar
 @onready var stamina_bar = $UI/StaminaBar
+@onready var ammo_amount = $UI/AmmoAmount
+@onready var health_amount = $UI/HealthAmount
+@onready var stamina_amount = $UI/StaminaAmount
 
 var is_attacking = false
 var new_direction = Vector2(0,1)
 var animation
 
-var health = 100
+var health = 10
 var max_health = 100
 var regen_health = 1
 var stamina = 100
@@ -20,10 +23,21 @@ var regen_stamina_threshold = 50
 
 signal health_updated
 signal stamina_updated
+signal ammo_pickups_updated
+signal health_pickups_updated
+signal stamina_pickups_updated
+
+enum Pickups { AMMO, STAMINA, HEALTH }
+var ammo_pickup = 5
+var health_pickup = 1
+var stamina_pickup = 1
 
 func _ready():
 	health_updated.connect(health_bar.update_health_ui)
 	stamina_updated.connect(stamina_bar.update_stamina_ui)
+	ammo_pickups_updated.connect(ammo_amount.update_ammo_amount_ui)
+	health_pickups_updated.connect(health_amount.update_health_amount_ui)
+	stamina_pickups_updated.connect(stamina_amount.update_stamina_amount_ui)
 
 func _process(delta):
 	var updated_heath = min(health + regen_health * delta, max_health)
@@ -106,6 +120,32 @@ func _input(event):
 		is_attacking = true
 		var animation = "attack_" + returned_direction(new_direction)
 		animation_sprite.play(animation)
+	if event.is_action_pressed("ui_consume_health"):
+		if health_pickup > 0 && health > 0:
+			health = min(health + 50, max_health)
+			health_pickup = health_pickup - 1
+			health_updated.emit(health, max_health)
+			health_pickups_updated.emit(health_pickup)
+	if event.is_action_pressed("ui_consume_stamina"):
+		if stamina_pickup > 0 && stamina >= 0:
+			stamina_pickup = stamina_pickup - 1
+			stamina = min(stamina + 50, max_stamina)
+			stamina_updated.emit(stamina, max_stamina)
+			stamina_pickups_updated.emit(stamina_pickup)
 
 func _on_animated_sprite_2d_animation_finished():
 	is_attacking = false
+
+func add_pickup(item):
+	if item == Global.Pickups.AMMO:
+		ammo_pickup = ammo_pickup + 3
+		ammo_pickups_updated.emit(ammo_pickup)
+		print("ammo val: " + str(ammo_pickup))
+	if item == Global.Pickups.HEALTH:
+		health_pickup = health_pickup + 1
+		health_pickups_updated.emit(health_pickup)
+		print("health val: " + str(health_pickup))
+	if item == Global.Pickups.STAMINA:
+		stamina_pickup = stamina_pickup + 1
+		stamina_pickups_updated.emit(stamina_pickup)
+		print("stamina val: " + str(stamina_pickup))	
